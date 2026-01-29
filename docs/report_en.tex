@@ -1,0 +1,178 @@
+\documentclass[oneside,a4paper,12pt]{article}
+
+% -------------------------------------------------------
+%  Packages
+% -------------------------------------------------------
+\usepackage{amssymb,amsmath}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{graphicx,subfigure,wrapfig}
+\usepackage{geometry}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[figureposition=bottom,tableposition=top,font={small,bf},labelfont=bf]{caption}
+\usepackage{algorithmicx,algorithm}
+\usepackage[noend]{algpseudocode}
+
+% -------------------------------------------------------
+%  Layout
+% -------------------------------------------------------
+\newgeometry{margin=1in,bottom=1.1in,footskip=.4in}
+\renewcommand{\baselinestretch}{1.4}
+\setlength{\parskip}{0.45em}
+
+% -------------------------------------------------------
+%  Custom Commands
+% -------------------------------------------------------
+\newcommand{\OPT}{\ensuremath{\mathop{\mathrm{OPT}}}}
+\newcommand{\APX}{\ensuremath{\mathop{\mathrm{APX}}}}
+\newcommand{\ALG}{\ensuremath{\mathop{\mathrm{ALG}}}}
+\newcommand{\IN}{\ensuremath{\mathbb{N}}} 
+\newcommand{\IR}{\ensuremath{\mathbb{R}}} 
+
+% Graphics
+\graphicspath{{figs/}}
+\newcommand{\centerimg}[2]{\vspace{1em}\begin{center}\includegraphics[width=#2]{#1}\end{center}\vspace{-1.5em}}
+
+% -------------------------------------------------------
+%  Project Info
+% -------------------------------------------------------
+\newcommand{\CourseReportTitle}{Solving Sphere Packing Problem using Gradient Descent and Quasi-Newton Methods}
+\newcommand{\GroupeMembers}{Mohammad Mohsen Abbaszadeh\\Sina Daneshgar}
+\newcommand{\CourseName}{Introduction to Optimization}
+\newcommand{\courseSemester}{Fall 2024}
+\newcommand{\CourseProfessor}{Dr. Kasra Alishahi}
+\newcommand{\Department}{Department of Mathematical Sciences}
+\newcommand{\University}{Sharif University of Technology}
+
+
+\begin{document}
+
+% -------------------------------------------------------
+%  Title Page
+% -------------------------------------------------------
+\pagestyle{empty}
+\begin{center}
+\includegraphics[scale=0.2]{logo.png}
+
+\vspace{-0.2cm}
+\University \\[-0.3em]
+\Department\\
+
+\vspace{2cm}
+
+{Title:}\\[1.2em]
+{\LARGE\textbf{\CourseReportTitle}}\\ 
+\vspace{1cm}
+
+\vspace{2cm}
+{Group Members:}\\[.5em]
+{\large\textbf{\GroupeMembers}}
+
+\vspace{0.7cm}
+
+{Course:}\\[.5em]
+{\large\textbf{\CourseName}}
+\vspace{0.7cm}
+
+{\large\textbf{\courseSemester}}
+
+{Instructor:}\\[.5em]
+{\large\textbf{\CourseProfessor}}
+
+\vspace{1.2cm}
+
+\end{center}
+\newpage
+
+\pagestyle{plain}
+\pagenumbering{arabic}
+
+% -------------------------------------------------------
+%  Abstract & Context
+% -------------------------------------------------------
+\section*{Abstract}
+
+This study investigates the problem of optimal sphere packing in a confined environment using Gradient Descent and Quasi-Newton methods. In this research, two optimization methods are examined: direct optimization of sphere locations using a potential energy function, and iterative optimization of sphere locations and container radius. The results show that different methods can offer different efficiency and accuracy under different conditions. Additionally, the dual problem, scientific and industrial applications of this problem, and future solutions for improving results are discussed.
+
+\vspace{1em}
+\noindent \textbf{Keywords}: 
+Potential Energy Function, Quasi-Newton, Gradient Descent, Optimal Sphere Packing
+
+\section{Introduction}
+
+Optimal packing of spheres in a confined environment is one of the fundamental problems in mathematics and engineering sciences. This problem is directly related to combinatorial optimization, coding theory, and materials mechanics. In this study, we have examined different methods for solving this problem and analyzed their performance in terms of efficiency and accuracy.
+
+\subsection{Problem Definition}
+
+The problem under investigation is finding the minimum radius $R$ for a larger sphere that can contain $n$ smaller spheres with unit radius, such that none of the smaller spheres overlap with each other. This problem is equivalent to finding the most optimal arrangement of smaller spheres inside the larger sphere.
+
+\section{Methods Used}
+
+In this research, two optimization methods have been investigated for solving the problem:
+
+\subsection{Gradient Descent Method}
+
+This method is one of the common techniques in numerical optimization that uses first-order derivatives of the objective function to find the direction of descent. In this method, by moving in the negative direction of the gradient, the value of the objective function decreases. One of the challenges of this method is selecting an appropriate step size for updating the positions of the spheres in the search space.
+
+\subsection{Quasi-Newton Method}
+
+This method is a more advanced technique compared to gradient descent, which uses approximations of the Hessian matrix to update the gradient. In this method, second derivative information is implicitly estimated, and the convergence speed is improved. One of the advantages of this method over gradient descent is its faster convergence rate to the local minimum.
+
+\section{Solution Ideas}
+
+\subsection{Direct Optimization With Potential Energy Function}
+
+\begin{itemize}
+\item \textbf{Main Idea:}
+
+In this method, the problem is considered as a global optimization problem. The goal is to find locations for the spheres that minimize a suitable potential energy function.
+
+The potential function is defined as:
+\[ 
+\phi(x_1, x_2, ..., x_n) = \sum^{}_{i \neq j} \frac{1}{||x_i - x_j||} + \sum^{}_{i} ||x_i||^2
+\]
+where $x_1, x_2, ... , x_n \in R^3$ are the locations of $n$ points.
+The first term maximizes distance (repulsion), and the second term keeps points near the origin (attraction).
+
+\end{itemize}
+
+\subsection{Iterative Optimization of Spheres and Container Radius (BFGS)}
+
+\textbf{Main Idea:} Instead of direct optimization, an iterative approach is used. Random positions are initialized in a container of radius $R_0$. Then, positions and radius are optimized.
+
+\subsubsection{Potential Energy Function}
+
+\[
+O_{ij} = max(0, 2 - ||x_i - x_j||)
+\]
+\[
+O_{i0} = max(0, ||x_i|| + 1 - R)
+\]
+\[
+E(x) = \sum^{n}_{i=1} \sum^{}_{i \neq j} O_{ij}^2 [i < j] + \sum^{n}_{i=1} O_{i0}^2
+\]
+
+Here $R$ is also an optimization variable. The first term handles overlap, the second handles boundary constraints.
+
+\section{Results}
+
+(See the Persian report for detailed tables and figures, as they are language-independent).
+
+\begin{figure}[h]
+\centerimg{image}{10cm}
+\caption{3D visualization of the results.}
+\label{fig:3d}
+\end{figure}
+
+
+% -------------------------------------------------------
+%  Bibliography
+% -------------------------------------------------------
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{References}
+
+\bibliographystyle{ieeetr}
+\bibliography{refs}
+
+\end{document}
