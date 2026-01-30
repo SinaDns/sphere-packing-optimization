@@ -43,14 +43,14 @@ python python/bfgs_solver.py
 Uses a potential energy function $F(x)$ comprising a repulsive term (Coulomb-like) and a harmonic attraction term to the center:
 
 $$
-F(x) = \sum_{i<j} \frac{1}{\Vert x_i - x_j \Vert} + \sum_{i} \Vert x_i \Vert^2
+F(x) = \sum_{i < j} \frac{1}{\Vert x_i - x_j \Vert} + \sum_{i} \Vert x_i \Vert^2
 $$
 
 ### BFGS (Quasi-Newton)
 Minimizes a penalty-based energy function $E(x)$ dealing with overlaps and boundary violations:
 
 $$
-E(x) = \sum_{i<j} \max(0, 2 - \Vert x_i - x_j \Vert)^2 + \sum_{i} \max(0, \Vert x_i \Vert + 1 - R)^2
+E(x) = \sum_{i < j} \max(0, 2 - \| x_i - x_j \|)^2 + \sum_{i} \max(0, \| x_i \| + 1 - R)^2
 $$
 
 This approach iteratively optimizes both the sphere positions and the container radius.
