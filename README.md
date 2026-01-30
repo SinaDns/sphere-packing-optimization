@@ -1,8 +1,13 @@
 # Sphere Packing Optimization Project
 
-This project reproduces experiments for the paper **"An Efficient Solution Space Exploring Method for Sphere Packing Problem"** (Jianrong Zhou et al.).
+![3D Packing Visualization](docs/figs/image.png)
+
+This project reproduces experiments for the paper **"An Efficient Solution Space Exploring Method for Sphere Packing Problem"** (Jianrong Zhou et al.) - [arXiv:2305.10023](https://arxiv.org/abs/2305.10023).
 
 The goal is to find the minimum radius $R$ for a container sphere to enclose $n$ non-overlapping unit spheres (radius $r=1$).
+
+## Course Information
+This project was defined for the **Introduction to Optimization** course, under the supervision of **Dr. Kasra Alishahi**.
 
 ## Contributors
 This project was a joint effort by:
@@ -10,29 +15,27 @@ This project was a joint effort by:
 - **Sina Daneshgar**
 
 ## Directory Structure
-We have unified the documentation to make it easier to monitor and maintain.
-- **`src/`**: Source code implementations.
-  - **`matlab/`**: Original MATLAB implementations.
-    - `bfgs_solver.m`: Quasi-Newton (BFGS) method.
-    - `gd_solver.m`: Gradient Descent method with Potential Energy Function.
-  - **`python/`**: Python translations of the algorithms using `numpy` and `matplotlib`.
-    - `bfgs_solver.py`
-    - `gd_solver.py`
+- **`matlab/`**: Original MATLAB implementations.
+  - `bfgs_solver.m`: Quasi-Newton (BFGS) method.
+  - `gd_solver.m`: Gradient Descent method with Potential Energy Function.
+- **`python/`**: Python translations of the algorithms using `numpy` and `matplotlib`.
+  - `bfgs_solver.py`: BFGS solver refactored for efficiency.
+  - `gd_solver.py`: Gradient Descent solver using analytical gradients.
 - **`docs/`**: Documentation and Reports.
-  - **`report_fa.tex`**: The complete original report in Persian (Latex source).
+  - **`report_fa.tex`**: The complete original report in Persian (LaTeX source).
   - **`report_en.tex`**: English version of the report.
-  - **`figs/`**: Shared figures and images for the reports.
+  - **`figs/`**: Shared figures and images used in the reports.
   - **`refs.bib`**: Bibliography file.
   - **`reference_paper.pdf`**: The reference paper by Zhou et al.
 
 ## Requirements
-- **Python**: Numpy, Matplotlib
+- **Python**: Numpy, Matplotlib, Scipy
 - **MATLAB**: Core
 
 ## How to Run Python Scripts
 ```bash
-python src/python/gd_solver.py
-python src/python/bfgs_solver.py
+python python/gd_solver.py
+python python/bfgs_solver.py
 ```
 
 ## Methods
